@@ -1,0 +1,731 @@
+/* Сброс и базовые стили */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary-color: #8b0000; /* Бордовый */
+    --secondary-color: #daa520; /* Золотой */
+    --dark-color: #1a1a2e; /* Темно-синий */
+    --light-color: #f8f5f0; /* Светло-бежевый */
+    --text-color: #333;
+    --text-light: #666;
+    --white: #ffffff;
+    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--white);
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.section {
+    padding: 80px 0;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 50px;
+    color: var(--dark-color);
+    position: relative;
+}
+
+.section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background-color: var(--secondary-color);
+}
+
+/* Навигация */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(26, 26, 46, 0.95);
+    z-index: 1000;
+    padding: 15px 0;
+    box-shadow: var(--shadow);
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+}
+
+.nav-menu li {
+    margin-left: 30px;
+}
+
+.nav-menu a {
+    color: var(--white);
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    padding: 5px 0;
+    position: relative;
+}
+
+.nav-menu a:hover {
+    color: var(--secondary-color);
+}
+
+.nav-menu a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--secondary-color);
+    transition: var(--transition);
+}
+
+.nav-menu a:hover::after {
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--white);
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Главный баннер */
+.hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+                url('images/concert-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+    text-align: center;
+    margin-top: 70px;
+}
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    color: var(--white);
+}
+
+.hero-text {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+    border: 2px solid transparent;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.btn-primary {
+    background-color: var(--secondary-color);
+    color: var(--dark-color);
+}
+
+.btn-primary:hover {
+    background-color: transparent;
+    border-color: var(--secondary-color);
+    color: var(--secondary-color);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    border-color: var(--white);
+    color: var(--white);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white);
+    color: var(--dark-color);
+}
+
+/* Об артисте */
+.about-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.about-image {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.artist-photo {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: var(--transition);
+}
+
+.artist-photo:hover {
+    transform: scale(1.03);
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.quote {
+    background-color: var(--light-color);
+    padding: 30px;
+    border-left: 5px solid var(--secondary-color);
+    margin: 30px 0;
+    border-radius: 0 10px 10px 0;
+}
+
+.quote p {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--text-color);
+}
+
+.quote cite {
+    display: block;
+    margin-top: 15px;
+    text-align: right;
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+/* Достижения */
+.achievements {
+    background-color: var(--light-color);
+}
+
+.achievements-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.achievement-card {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: var(--transition);
+}
+
+.achievement-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+}
+
+.achievement-icon {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+}
+
+.achievement-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--dark-color);
+}
+
+.achievements-list {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.list-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--dark-color);
+    text-align: center;
+}
+
+.achievements-list ul {
+    columns: 2;
+    column-gap: 40px;
+    list-style-position: inside;
+}
+
+.achievements-list li {
+    margin-bottom: 15px;
+    padding-left: 10px;
+    break-inside: avoid;
+    position: relative;
+}
+
+.achievements-list li::before {
+    content: "★";
+    color: var(--secondary-color);
+    margin-right: 10px;
+}
+
+/* Благотворительность */
+.charity-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 50px;
+    align-items: center;
+}
+
+.charity-events {
+    margin: 30px 0;
+}
+
+.event {
+    background-color: var(--light-color);
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    border-left: 4px solid var(--primary-color);
+}
+
+.event h3 {
+    color: var(--primary-color);
+    margin-bottom: 5px;
+}
+
+.charity-note {
+    font-style: italic;
+    color: var(--text-light);
+    margin-top: 20px;
+}
+
+.charity-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.charity-icon {
+    font-size: 8rem;
+    color: var(--primary-color);
+    opacity: 0.7;
+}
+
+/* Концерт */
+.concert-card {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    background: linear-gradient(135deg, var(--dark-color), #2a2a4a);
+    color: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.concert-date {
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    text-align: center;
+}
+
+.date-day {
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.date-month {
+    font-size: 1.8rem;
+    margin: 10px 0;
+    color: var(--secondary-color);
+}
+
+.date-year {
+    font-size: 1.3rem;
+    opacity: 0.8;
+}
+
+.concert-details {
+    padding: 40px;
+}
+
+.concert-details h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.concert-time, .concert-location {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.concert-time i, .concert-location i {
+    margin-right: 10px;
+    color: var(--secondary-color);
+}
+
+.concert-description {
+    margin: 25px 0;
+    font-size: 1.1rem;
+    line-height: 1.7;
+}
+
+.concert-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.concert-phone {
+    font-size: 1.2rem;
+}
+
+/* Контакты */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 50px;
+}
+
+.contact-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: var(--dark-color);
+}
+
+.contact-details {
+    margin-top: 30px;
+}
+
+.contact-details p {
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+}
+
+.contact-details i {
+    color: var(--primary-color);
+    margin-right: 10px;
+    width: 20px;
+    text-align: center;
+}
+
+.contact-details a {
+    color: var(--text-color);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.contact-details a:hover {
+    color: var(--primary-color);
+}
+
+.contact-note {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: var(--light-color);
+    border-radius: 8px;
+    font-style: italic;
+}
+
+.qr-code {
+    text-align: center;
+}
+
+.qr-placeholder {
+    background-color: var(--white);
+    border: 2px dashed var(--text-light);
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 250px;
+}
+
+.qr-simulated {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.qr-lines {
+    width: 160px;
+    height: 160px;
+    background-image: 
+        linear-gradient(90deg, transparent 79%, #000 79%, #000 81%, transparent 81%),
+        linear-gradient(0deg, transparent 79%, #000 79%, #000 81%, transparent 81%),
+        linear-gradient(90deg, transparent 19%, #000 19%, #000 21%, transparent 21%),
+        linear-gradient(0deg, transparent 19%, #000 19%, #000 21%, transparent 21%),
+        linear-gradient(90deg, transparent 39%, #000 39%, #000 41%, transparent 41%),
+        linear-gradient(0deg, transparent 39%, #000 39%, #000 41%, transparent 41%),
+        linear-gradient(90deg, transparent 59%, #000 59%, #000 61%, transparent 61%),
+        linear-gradient(0deg, transparent 59%, #000 59%, #000 61%, transparent 61%);
+    background-size: 200px 200px;
+    background-position: center;
+}
+
+.qr-text {
+    margin-top: 15px;
+    color: var(--text-light);
+    font-size: 0.9rem;
+}
+
+/* Футер */
+.footer {
+    background-color: var(--dark-color);
+    color: var(--white);
+    padding: 40px 0;
+    text-align: center;
+}
+
+.footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: var(--secondary-color);
+}
+
+.footer p {
+    margin-bottom: 10px;
+    opacity: 0.8;
+}
+
+.footer-note {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    opacity: 0.6;
+}
+
+/* Адаптивность */
+@media (max-width: 992px) {
+    .section-title {
+        font-size: 2.2rem;
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .about-content,
+    .charity-content,
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+    
+    .achievements-list ul {
+        columns: 1;
+    }
+    
+    .concert-card {
+        grid-template-columns: 1fr;
+    }
+    
+    .concert-date {
+        flex-direction: row;
+        justify-content: space-around;
+        padding: 20px;
+    }
+    
+    .date-day {
+        font-size: 2.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        flex-direction: column;
+        background-color: var(--dark-color);
+        text-align: center;
+        transition: var(--transition);
+        padding: 20px 0;
+    }
+    
+    .nav-menu.active {
+        left: 0;
+    }
+    
+    .nav-menu li {
+        margin: 15px 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .hero {
+        min-height: 600px;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.3rem;
+    }
+    
+    .section {
+        padding: 60px 0;
+    }
+    
+    .achievements-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .section-title {
+        font-size: 1.8rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 250px;
+        text-align: center;
+    }
+    
+    .concert-actions {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+/* Простой вариант с фото рядом */
+.charity-simple {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.charity-text-simple {
+    flex: 1;
+}
+
+.charity-photo-simple {
+    flex: 1;
+    max-width: 500px;
+}
+
+.charity-photo-simple img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.photo-description {
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .charity-simple {
+        flex-direction: column;
+    }
+    
+    .charity-photo-simple {
+        max-width: 100%;
+        order: -1; /* Фото будет сверху на мобильных */
+    }
+}
