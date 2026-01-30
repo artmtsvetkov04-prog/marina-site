@@ -1,3 +1,18 @@
+/* Временное исправление для мобильной версии */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px !important;
+    }
+    
+    .charity-simple {
+        display: block !important;
+    }
+    
+    .charity-photo-simple {
+        max-width: 100% !important;
+        margin-top: 20px !important;
+    }
+}
 /* Сброс и базовые стили */
 * {
     margin: 0;
