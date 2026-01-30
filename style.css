@@ -1366,3 +1366,56 @@ body {
         gap: 20px;
     }
 }
+/* Исправление для мобильной версии благотворительности */
+@media (max-width: 768px) {
+    .charity-simple {
+        flex-direction: column !important;
+        gap: 30px !important;
+    }
+    
+    .charity-photo-simple {
+        order: 2 !important; /* Фото будет внизу на мобильных */
+        max-width: 100% !important;
+        margin-top: 20px !important;
+    }
+    
+    .charity-text-simple {
+        order: 1 !important;
+        width: 100% !important;
+    }
+    
+    .charity-events {
+        margin: 20px 0 !important;
+    }
+    
+    .event {
+        padding: 15px !important;
+        margin-bottom: 15px !important;
+    }
+    
+    .event h3 {
+        font-size: 1.1rem !important;
+    }
+    
+    .photo-description {
+        margin-top: 10px !important;
+        padding: 5px 10px !important;
+        font-size: 0.9rem !important;
+    }
+}
+
+/* Дополнительные исправления для очень маленьких экранов */
+@media (max-width: 480px) {
+    .charity-simple {
+        padding: 0 10px !important;
+    }
+    
+    .event h3 {
+        font-size: 1rem !important;
+    }
+    
+    .charity-note {
+        padding: 15px !important;
+        font-size: 0.9rem !important;
+    }
+}
