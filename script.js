@@ -67,3 +67,39 @@ window.addEventListener('scroll', () => {
 window.addEventListener('load', () => {
     document.body.classList.add('loaded');
 });
+// ... существующий код ...
+
+// Анимация статистики
+function animateStats() {
+    const statNumbers = document.querySelectorAll('.stat-number');
+    
+    statNumbers.forEach(stat => {
+        const target = parseInt(stat.getAttribute('data-count'));
+        const increment = target / 100;
+        let current = 0;
+        
+        const timer = setInterval(() => {
+            current += increment;
+            if (current >= target) {
+                current = target;
+                clearInterval(timer);
+            }
+            stat.textContent = Math.floor(current);
+        }, 20);
+    });
+}
+
+// Запуск анимации при прокрутке к секции
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            animateStats();
+            observer.unobserve(entry.target);
+        }
+    });
+}, { threshold: 0.5 });
+
+const statsSection = document.querySelector('#stats');
+if (statsSection) {
+    observer.observe(statsSection);
+}

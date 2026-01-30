@@ -6,15 +6,18 @@
 }
 
 :root {
-    --primary-color: #8b0000; /* Бордовый */
+    --primary-color: #8b0000; /* Бордовый/красный */
     --secondary-color: #daa520; /* Золотой */
-    --dark-color: #1a1a2e; /* Темно-синий */
-    --light-color: #f8f5f0; /* Светло-бежевый */
-    --text-color: #333;
-    --text-light: #666;
+    --accent-color: #b8860b; /* Тёмное золото */
+    --dark-color: #1a0a0a; /* Тёмно-бордовый вместо синего */
+    --light-color: #fff8f0; /* Тёплый светлый фон */
+    --text-color: #2c1810;
+    --text-light: #5a3a2e;
     --white: #ffffff;
-    --shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
+    --shadow: 0 8px 25px rgba(139, 0, 0, 0.15);
+    --transition: all 0.4s ease;
+    --gradient-red-gold: linear-gradient(135deg, #8b0000 0%, #b8860b 100%);
+    --gradient-gold-red: linear-gradient(135deg, #daa520 0%, #8b0000 100%);
 }
 
 html {
@@ -23,9 +26,12 @@ html {
 
 body {
     font-family: 'Roboto', sans-serif;
-    line-height: 1.6;
+    line-height: 1.7;
     color: var(--text-color);
     background-color: var(--white);
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(218, 165, 32, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(139, 0, 0, 0.05) 0%, transparent 20%);
 }
 
 .container {
@@ -36,39 +42,43 @@ body {
 }
 
 .section {
-    padding: 80px 0;
+    padding: 90px 0;
 }
 
 .section-title {
     font-family: 'Playfair Display', serif;
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     text-align: center;
     margin-bottom: 50px;
     color: var(--dark-color);
     position: relative;
+    padding-bottom: 20px;
 }
 
 .section-title::after {
     content: '';
     position: absolute;
-    bottom: -15px;
+    bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background-color: var(--secondary-color);
+    width: 100px;
+    height: 4px;
+    background: var(--gradient-gold-red);
+    border-radius: 2px;
 }
 
-/* Навигация */
+/* Навигация - красно-золотая */
 .navbar {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(26, 26, 46, 0.95);
+    background: rgba(26, 10, 10, 0.97);
+    backdrop-filter: blur(10px);
     z-index: 1000;
     padding: 15px 0;
-    box-shadow: var(--shadow);
+    box-shadow: 0 5px 20px rgba(139, 0, 0, 0.2);
+    border-bottom: 2px solid var(--secondary-color);
 }
 
 .navbar .container {
@@ -79,10 +89,12 @@ body {
 
 .logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: 700;
-    color: var(--white);
+    color: var(--secondary-color);
     text-decoration: none;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    letter-spacing: 1px;
 }
 
 .nav-menu {
@@ -91,7 +103,7 @@ body {
 }
 
 .nav-menu li {
-    margin-left: 30px;
+    margin-left: 35px;
 }
 
 .nav-menu a {
@@ -99,26 +111,38 @@ body {
     text-decoration: none;
     font-weight: 500;
     transition: var(--transition);
-    padding: 5px 0;
+    padding: 8px 5px;
     position: relative;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
 }
 
 .nav-menu a:hover {
     color: var(--secondary-color);
 }
 
-.nav-menu a::after {
+.nav-menu a::before {
     content: '';
     position: absolute;
     bottom: 0;
     left: 0;
     width: 0;
     height: 2px;
-    background-color: var(--secondary-color);
+    background: var(--secondary-color);
     transition: var(--transition);
+    box-shadow: 0 0 10px var(--secondary-color);
 }
 
-.nav-menu a:hover::after {
+.nav-menu a:hover::before {
+    width: 100%;
+}
+
+.nav-menu a.active {
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.nav-menu a.active::before {
     width: 100%;
 }
 
@@ -126,105 +150,246 @@ body {
     display: none;
     background: none;
     border: none;
-    color: var(--white);
-    font-size: 1.5rem;
+    color: var(--secondary-color);
+    font-size: 1.8rem;
     cursor: pointer;
+    padding: 5px;
+    transition: var(--transition);
 }
 
-/* Главный баннер */
+.menu-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* Главный баннер с золотым градиентом */
 .hero {
     position: relative;
     height: 100vh;
-    min-height: 700px;
+    min-height: 750px;
     display: flex;
     align-items: center;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
-                url('images/concert-bg.jpg');
+    background: 
+        linear-gradient(135deg, rgba(26, 10, 10, 0.85) 0%, rgba(139, 0, 0, 0.8) 100%),
+        url('images/concert-bg.jpg');
     background-size: cover;
     background-position: center;
+    background-attachment: fixed;
     color: var(--white);
     text-align: center;
     margin-top: 70px;
+    overflow: hidden;
 }
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-gold-red);
+    z-index: 1;
+}
+
 .hero-content {
     position: relative;
     z-index: 2;
-    max-width: 800px;
+    max-width: 850px;
     margin: 0 auto;
+    padding: 20px;
 }
 
 .hero-title {
     font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
+    font-size: 4.2rem;
     margin-bottom: 20px;
     color: var(--secondary-color);
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1.5px;
+    position: relative;
+    display: inline-block;
+}
+
+.hero-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 3px;
+    background: var(--secondary-color);
+    border-radius: 2px;
+    box-shadow: 0 0 15px var(--secondary-color);
 }
 
 .hero-subtitle {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 30px;
     color: var(--white);
+    font-weight: 300;
+    letter-spacing: 1px;
 }
 
 .hero-text {
-    font-size: 1.2rem;
-    margin-bottom: 40px;
-    opacity: 0.9;
+    font-size: 1.3rem;
+    margin-bottom: 45px;
+    opacity: 0.95;
+    line-height: 1.9;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .hero-buttons {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 25px;
     flex-wrap: wrap;
 }
 
 .btn {
     display: inline-block;
-    padding: 12px 30px;
-    border-radius: 30px;
+    padding: 15px 35px;
+    border-radius: 35px;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: 600;
     transition: var(--transition);
     border: 2px solid transparent;
     cursor: pointer;
-    font-size: 1rem;
+    font-size: 1.05rem;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transition: var(--transition);
+    z-index: -1;
+}
+
+.btn:hover::before {
+    left: 100%;
 }
 
 .btn-primary {
-    background-color: var(--secondary-color);
-    color: var(--dark-color);
+    background: var(--gradient-gold-red);
+    color: var(--white);
+    box-shadow: 0 8px 20px rgba(218, 165, 32, 0.4);
 }
 
 .btn-primary:hover {
-    background-color: transparent;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(218, 165, 32, 0.6);
     border-color: var(--secondary-color);
-    color: var(--secondary-color);
 }
 
 .btn-secondary {
-    background-color: transparent;
+    background: transparent;
     border-color: var(--white);
     color: var(--white);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
 }
 
 .btn-secondary:hover {
-    background-color: var(--white);
+    background: var(--white);
     color: var(--dark-color);
+    transform: translateY(-5px);
+    border-color: var(--white);
+}
+
+/* Иконки с красными/золотыми фонами */
+.achievement-icon,
+.event-icon,
+.contact-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--gradient-red-gold);
+    box-shadow: 0 8px 20px rgba(139, 0, 0, 0.3);
+    position: relative;
+}
+
+.achievement-icon i,
+.event-icon i,
+.contact-icon i {
+    font-size: 2.2rem;
+    color: var(--white);
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+/* Добавим узоры вокруг иконок */
+.achievement-icon::before,
+.event-icon::before {
+    content: '';
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border: 2px dashed var(--secondary-color);
+    border-radius: 50%;
+    opacity: 0.4;
+    animation: rotate 20s linear infinite;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Об артисте */
+.about {
+    background-color: var(--light-color);
+    position: relative;
+}
+
+.about::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 15px;
+    background: var(--gradient-red-gold);
+}
+
 .about-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 60px;
     align-items: center;
 }
 
 .about-image {
-    border-radius: 10px;
+    border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--shadow);
+    border: 5px solid var(--white);
+    position: relative;
+}
+
+.about-image::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border: 2px solid var(--secondary-color);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.5;
 }
 
 .artist-photo {
@@ -232,246 +397,497 @@ body {
     height: auto;
     display: block;
     transition: var(--transition);
+    filter: sepia(0.1) brightness(1.05);
 }
 
 .artist-photo:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
+    filter: sepia(0);
 }
 
 .about-text p {
-    margin-bottom: 20px;
-    font-size: 1.1rem;
-    line-height: 1.8;
+    margin-bottom: 25px;
+    font-size: 1.15rem;
+    line-height: 1.9;
 }
 
 .quote {
-    background-color: var(--light-color);
-    padding: 30px;
-    border-left: 5px solid var(--secondary-color);
-    margin: 30px 0;
-    border-radius: 0 10px 10px 0;
+    background: var(--white);
+    padding: 35px;
+    border-left: 6px solid var(--secondary-color);
+    margin: 35px 0;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 10px 25px rgba(139, 0, 0, 0.1);
+    position: relative;
+}
+
+.quote::before {
+    content: "❝";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 3rem;
+    color: var(--secondary-color);
+    opacity: 0.3;
+    font-family: serif;
 }
 
 .quote p {
     font-style: italic;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--text-color);
+    line-height: 1.8;
+    padding-left: 40px;
 }
 
 .quote cite {
     display: block;
-    margin-top: 15px;
+    margin-top: 20px;
     text-align: right;
     color: var(--primary-color);
-    font-weight: 500;
+    font-weight: 600;
+    font-size: 1.1rem;
 }
 
-/* Достижения */
+/* Достижения с узорным фоном */
 .achievements {
-    background-color: var(--light-color);
+    background-color: var(--white);
+    background-image: 
+        radial-gradient(circle at 20% 30%, rgba(139, 0, 0, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(218, 165, 32, 0.03) 0%, transparent 50%);
+    position: relative;
+}
+
+.achievements::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--gradient-gold-red);
 }
 
 .achievements-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    margin-bottom: 50px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 35px;
+    margin-bottom: 60px;
 }
 
 .achievement-card {
-    background-color: var(--white);
-    padding: 30px;
-    border-radius: 10px;
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 15px;
     box-shadow: var(--shadow);
     text-align: center;
+    transition: var(--transition);
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    position: relative;
+}
+
+.achievement-card::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: var(--gradient-red-gold);
+    border-radius: 17px;
+    z-index: -1;
+    opacity: 0;
     transition: var(--transition);
 }
 
 .achievement-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(139, 0, 0, 0.2);
 }
 
-.achievement-icon {
-    font-size: 2.5rem;
-    color: var(--secondary-color);
-    margin-bottom: 20px;
+.achievement-card:hover::before {
+    opacity: 1;
 }
 
 .achievement-card h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 1.5rem;
-    margin-bottom: 15px;
+    font-size: 1.6rem;
+    margin-bottom: 20px;
     color: var(--dark-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.achievement-card h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    height: 2px;
+    background: var(--secondary-color);
 }
 
 .achievements-list {
-    background-color: var(--white);
-    padding: 40px;
-    border-radius: 10px;
+    background: var(--light-color);
+    padding: 50px;
+    border-radius: 15px;
     box-shadow: var(--shadow);
+    border: 2px solid rgba(218, 165, 32, 0.3);
 }
 
 .list-title {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+    font-size: 2rem;
+    margin-bottom: 30px;
     color: var(--dark-color);
     text-align: center;
+    position: relative;
+    display: inline-block;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.list-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: var(--gradient-red-gold);
+    border-radius: 2px;
 }
 
 .achievements-list ul {
     columns: 2;
-    column-gap: 40px;
-    list-style-position: inside;
+    column-gap: 50px;
+    list-style: none;
 }
 
 .achievements-list li {
-    margin-bottom: 15px;
-    padding-left: 10px;
+    margin-bottom: 20px;
+    padding-left: 35px;
     break-inside: avoid;
     position: relative;
+    line-height: 1.7;
 }
 
 .achievements-list li::before {
-    content: "★";
+    content: "✦";
+    position: absolute;
+    left: 0;
     color: var(--secondary-color);
-    margin-right: 10px;
+    font-size: 1.3rem;
+    top: 2px;
 }
 
 /* Благотворительность */
-.charity-content {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
+.charity {
+    background-color: var(--light-color);
+    position: relative;
+}
+
+.charity::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--gradient-red-gold);
+}
+
+.charity-simple {
+    display: flex;
     gap: 50px;
-    align-items: center;
+    align-items: flex-start;
+}
+
+.charity-text-simple {
+    flex: 1.2;
+}
+
+.charity-photo-simple {
+    flex: 0.8;
+    max-width: 500px;
+    position: relative;
+}
+
+.charity-photo-simple::before {
+    content: '';
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    right: -15px;
+    bottom: -15px;
+    border: 3px solid var(--secondary-color);
+    border-radius: 20px;
+    z-index: -1;
+    opacity: 0.4;
+}
+
+.charity-photo-simple img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    filter: brightness(1.05) contrast(1.05);
+    transition: var(--transition);
+    border: 5px solid var(--white);
+}
+
+.charity-photo-simple img:hover {
+    transform: scale(1.02);
+    filter: brightness(1.1);
+}
+
+.photo-description {
+    text-align: center;
+    margin-top: 15px;
+    font-style: italic;
+    color: var(--primary-color);
+    font-weight: 500;
+    font-size: 1rem;
+    background: rgba(218, 165, 32, 0.1);
+    padding: 8px 15px;
+    border-radius: 20px;
+    display: inline-block;
 }
 
 .charity-events {
-    margin: 30px 0;
+    margin: 35px 0;
 }
 
 .event {
-    background-color: var(--light-color);
-    padding: 20px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
+    background: var(--white);
+    padding: 25px;
+    margin-bottom: 20px;
+    border-radius: 12px;
+    border-left: 6px solid var(--primary-color);
+    box-shadow: 0 8px 20px rgba(139, 0, 0, 0.1);
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.event::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--gradient-red-gold);
+    opacity: 0;
+    transition: var(--transition);
+    z-index: 0;
+}
+
+.event:hover {
+    transform: translateX(10px);
+}
+
+.event:hover::before {
+    opacity: 0.05;
 }
 
 .event h3 {
     color: var(--primary-color);
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.event p {
+    color: var(--text-light);
+    position: relative;
+    z-index: 1;
 }
 
 .charity-note {
     font-style: italic;
-    color: var(--text-light);
-    margin-top: 20px;
-}
-
-.charity-image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.charity-icon {
-    font-size: 8rem;
     color: var(--primary-color);
-    opacity: 0.7;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(139, 0, 0, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(218, 165, 32, 0.3);
+    font-weight: 500;
+    text-align: center;
 }
 
 /* Концерт */
+.concert {
+    background-color: var(--white);
+    position: relative;
+}
+
+.concert::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--gradient-gold-red);
+}
+
 .concert-card {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    background: linear-gradient(135deg, var(--dark-color), #2a2a4a);
+    grid-template-columns: 220px 1fr;
+    background: linear-gradient(135deg, #1a0a0a 0%, #2a1515 100%);
     color: var(--white);
-    border-radius: 15px;
+    border-radius: 20px;
     overflow: hidden;
-    box-shadow: var(--shadow);
-    max-width: 900px;
+    box-shadow: 0 20px 50px rgba(139, 0, 0, 0.3);
+    max-width: 950px;
     margin: 0 auto;
+    border: 2px solid var(--secondary-color);
+    position: relative;
+}
+
+.concert-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: var(--gradient-gold-red);
 }
 
 .concert-date {
-    background-color: var(--primary-color);
+    background: var(--gradient-red-gold);
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 30px;
+    padding: 35px;
     text-align: center;
+    position: relative;
+}
+
+.concert-date::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    right: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.3);
 }
 
 .date-day {
-    font-size: 3.5rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 800;
     line-height: 1;
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
 }
 
 .date-month {
-    font-size: 1.8rem;
-    margin: 10px 0;
+    font-size: 2rem;
+    margin: 15px 0;
     color: var(--secondary-color);
+    font-weight: 700;
+    letter-spacing: 1.5px;
 }
 
 .date-year {
-    font-size: 1.3rem;
-    opacity: 0.8;
+    font-size: 1.5rem;
+    opacity: 0.9;
+    font-weight: 500;
 }
 
 .concert-details {
-    padding: 40px;
+    padding: 45px;
 }
 
 .concert-details h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    margin-bottom: 20px;
+    font-size: 2.2rem;
+    margin-bottom: 25px;
     color: var(--secondary-color);
+    line-height: 1.3;
 }
 
 .concert-time, .concert-location {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-bottom: 18px;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
 }
 
 .concert-time i, .concert-location i {
-    margin-right: 10px;
+    margin-right: 15px;
     color: var(--secondary-color);
+    font-size: 1.3rem;
+    width: 25px;
+    text-align: center;
 }
 
 .concert-description {
-    margin: 25px 0;
-    font-size: 1.1rem;
-    line-height: 1.7;
+    margin: 30px 0;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    opacity: 0.95;
 }
 
 .concert-actions {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 20px;
+    gap: 25px;
 }
 
 .concert-phone {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    background: rgba(218, 165, 32, 0.1);
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1px solid rgba(218, 165, 32, 0.3);
+}
+
+.concert-phone strong {
+    color: var(--secondary-color);
 }
 
 /* Контакты */
+.contact {
+    background-color: var(--light-color);
+    position: relative;
+}
+
+.contact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--gradient-red-gold);
+}
+
 .contact-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
+    gap: 60px;
 }
 
 .contact-info h3 {
     font-family: 'Playfair Display', serif;
-    font-size: 2rem;
-    margin-bottom: 10px;
+    font-size: 2.2rem;
+    margin-bottom: 15px;
     color: var(--dark-color);
+}
+
+.contact-info > p {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+    font-weight: 500;
 }
 
 .contact-details {
@@ -479,14 +895,17 @@ body {
 }
 
 .contact-details p {
-    margin-bottom: 15px;
-    font-size: 1.1rem;
+    margin-bottom: 20px;
+    font-size: 1.15rem;
+    display: flex;
+    align-items: center;
 }
 
 .contact-details i {
     color: var(--primary-color);
-    margin-right: 10px;
-    width: 20px;
+    margin-right: 15px;
+    font-size: 1.3rem;
+    width: 25px;
     text-align: center;
 }
 
@@ -494,96 +913,184 @@ body {
     color: var(--text-color);
     text-decoration: none;
     transition: var(--transition);
+    font-weight: 500;
 }
 
 .contact-details a:hover {
     color: var(--primary-color);
+    text-decoration: underline;
 }
 
 .contact-note {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: var(--light-color);
-    border-radius: 8px;
+    margin-top: 35px;
+    padding: 25px;
+    background: var(--white);
+    border-radius: 12px;
+    border-left: 5px solid var(--secondary-color);
+    box-shadow: 0 10px 25px rgba(139, 0, 0, 0.1);
     font-style: italic;
+    line-height: 1.8;
+    color: var(--text-light);
 }
 
 .qr-code {
     text-align: center;
+    background: var(--white);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border: 2px solid rgba(218, 165, 32, 0.2);
+}
+
+.qr-code h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    color: var(--dark-color);
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.qr-code h3::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70px;
+    height: 3px;
+    background: var(--gradient-red-gold);
 }
 
 .qr-placeholder {
-    background-color: var(--white);
-    border: 2px dashed var(--text-light);
-    border-radius: 10px;
+    background: var(--white);
+    border: 2px solid rgba(139, 0, 0, 0.2);
+    border-radius: 12px;
     padding: 30px;
-    margin: 20px auto;
-    max-width: 250px;
+    margin: 25px auto;
+    max-width: 280px;
+    transition: var(--transition);
+}
+
+.qr-placeholder:hover {
+    border-color: var(--secondary-color);
+    box-shadow: 0 10px 25px rgba(218, 165, 32, 0.2);
 }
 
 .qr-simulated {
     position: relative;
-    width: 200px;
-    height: 200px;
+    width: 220px;
+    height: 220px;
     margin: 0 auto;
-    background-color: #f0f0f0;
+    background: linear-gradient(135deg, #f8f5f0 0%, #ffffff 100%);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid rgba(139, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
 }
 
-.qr-lines {
-    width: 160px;
-    height: 160px;
+.qr-simulated::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
     background-image: 
-        linear-gradient(90deg, transparent 79%, #000 79%, #000 81%, transparent 81%),
-        linear-gradient(0deg, transparent 79%, #000 79%, #000 81%, transparent 81%),
-        linear-gradient(90deg, transparent 19%, #000 19%, #000 21%, transparent 21%),
-        linear-gradient(0deg, transparent 19%, #000 19%, #000 21%, transparent 21%),
-        linear-gradient(90deg, transparent 39%, #000 39%, #000 41%, transparent 41%),
-        linear-gradient(0deg, transparent 39%, #000 39%, #000 41%, transparent 41%),
-        linear-gradient(90deg, transparent 59%, #000 59%, #000 61%, transparent 61%),
-        linear-gradient(0deg, transparent 59%, #000 59%, #000 61%, transparent 61%);
-    background-size: 200px 200px;
+        linear-gradient(90deg, transparent 79%, #8b0000 79%, #8b0000 81%, transparent 81%),
+        linear-gradient(0deg, transparent 79%, #8b0000 79%, #8b0000 81%, transparent 81%),
+        linear-gradient(90deg, transparent 19%, #8b0000 19%, #8b0000 21%, transparent 21%),
+        linear-gradient(0deg, transparent 19%, #8b0000 19%, #8b0000 21%, transparent 21%),
+        linear-gradient(90deg, transparent 39%, #8b0000 39%, #8b0000 41%, transparent 41%),
+        linear-gradient(0deg, transparent 39%, #8b0000 39%, #8b0000 41%, transparent 41%),
+        linear-gradient(90deg, transparent 59%, #8b0000 59%, #8b0000 61%, transparent 61%),
+        linear-gradient(0deg, transparent 59%, #8b0000 59%, #8b0000 61%, transparent 61%);
+    background-size: 220px 220px;
     background-position: center;
 }
 
-.qr-text {
+.qr-simulated p {
     margin-top: 15px;
-    color: var(--text-light);
+    color: var(--primary-color);
+    font-weight: 500;
     font-size: 0.9rem;
+    background: rgba(139, 0, 0, 0.05);
+    padding: 8px 15px;
+    border-radius: 20px;
+    position: relative;
+    z-index: 1;
 }
 
-/* Футер */
+.qr-text {
+    margin-top: 20px;
+    color: var(--text-light);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Футер с градиентом */
 .footer {
-    background-color: var(--dark-color);
+    background: linear-gradient(135deg, #1a0a0a 0%, #2a1515 100%);
     color: var(--white);
-    padding: 40px 0;
+    padding: 50px 0;
     text-align: center;
+    border-top: 5px solid var(--secondary-color);
+    position: relative;
+}
+
+.footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gradient-gold-red);
 }
 
 .footer-logo {
     font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
+    font-size: 2.2rem;
     margin-bottom: 20px;
     color: var(--secondary-color);
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.4);
+    letter-spacing: 1.5px;
 }
 
 .footer p {
-    margin-bottom: 10px;
-    opacity: 0.8;
+    margin-bottom: 15px;
+    opacity: 0.85;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.8;
 }
 
 .footer-note {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    opacity: 0.6;
+    margin-top: 25px;
+    font-size: 0.95rem;
+    opacity: 0.7;
 }
 
 /* Адаптивность */
+@media (max-width: 1100px) {
+    .section-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.6rem;
+    }
+}
+
 @media (max-width: 992px) {
     .section-title {
-        font-size: 2.2rem;
+        font-size: 2.3rem;
     }
     
     .hero-title {
@@ -591,10 +1098,10 @@ body {
     }
     
     .about-content,
-    .charity-content,
+    .charity-simple,
     .contact-content {
         grid-template-columns: 1fr;
-        gap: 40px;
+        gap: 50px;
     }
     
     .achievements-list ul {
@@ -603,16 +1110,35 @@ body {
     
     .concert-card {
         grid-template-columns: 1fr;
+        max-width: 600px;
     }
     
     .concert-date {
         flex-direction: row;
         justify-content: space-around;
-        padding: 20px;
+        padding: 25px;
+    }
+    
+    .concert-date::after {
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2px;
+        background: rgba(255, 255, 255, 0.3);
     }
     
     .date-day {
-        font-size: 2.5rem;
+        font-size: 3rem;
+    }
+    
+    .date-month {
+        font-size: 1.8rem;
+    }
+    
+    .charity-photo-simple {
+        max-width: 100%;
+        order: -1;
     }
 }
 
@@ -623,10 +1149,13 @@ body {
         left: -100%;
         width: 100%;
         flex-direction: column;
-        background-color: var(--dark-color);
+        background: rgba(26, 10, 10, 0.98);
+        backdrop-filter: blur(10px);
         text-align: center;
         transition: var(--transition);
-        padding: 20px 0;
+        padding: 30px 0;
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        z-index: 999;
     }
     
     .nav-menu.active {
@@ -634,7 +1163,12 @@ body {
     }
     
     .nav-menu li {
-        margin: 15px 0;
+        margin: 20px 0;
+    }
+    
+    .nav-menu a {
+        font-size: 1.2rem;
+        padding: 10px;
     }
     
     .menu-toggle {
@@ -642,7 +1176,8 @@ body {
     }
     
     .hero {
-        min-height: 600px;
+        min-height: 650px;
+        background-attachment: scroll;
     }
     
     .hero-title {
@@ -650,82 +1185,184 @@ body {
     }
     
     .hero-subtitle {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
     }
     
     .section {
-        padding: 60px 0;
+        padding: 70px 0;
     }
     
     .achievements-grid {
         grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-title {
-        font-size: 2rem;
-    }
-    
-    .section-title {
-        font-size: 1.8rem;
-    }
-    
-    .hero-buttons {
-        flex-direction: column;
-        align-items: center;
-    }
-    
-    .btn {
-        width: 100%;
-        max-width: 250px;
-        text-align: center;
+        gap: 30px;
     }
     
     .concert-actions {
         flex-direction: column;
         align-items: flex-start;
+        gap: 20px;
     }
 }
-/* Простой вариант с фото рядом */
-.charity-simple {
-    display: flex;
-    gap: 40px;
-    align-items: flex-start;
-}
 
-.charity-text-simple {
-    flex: 1;
-}
-
-.charity-photo-simple {
-    flex: 1;
-    max-width: 500px;
-}
-
-.charity-photo-simple img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-.photo-description {
-    text-align: center;
-    margin-top: 10px;
-    font-style: italic;
-    color: #666;
-    font-size: 0.9rem;
-}
-
-/* Адаптивность */
-@media (max-width: 768px) {
-    .charity-simple {
-        flex-direction: column;
+@media (max-width: 576px) {
+    .hero-title {
+        font-size: 2.2rem;
     }
     
-    .charity-photo-simple {
-        max-width: 100%;
-        order: -1; /* Фото будет сверху на мобильных */
+    .section-title {
+        font-size: 2rem;
+    }
+    
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .btn {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+        padding: 14px 30px;
+    }
+    
+    .achievements-list {
+        padding: 35px 25px;
+    }
+    
+    .concert-card {
+        border-radius: 15px;
+    }
+    
+    .concert-details {
+        padding: 35px 25px;
+    }
+    
+    .concert-details h3 {
+        font-size: 1.8rem;
+    }
+    
+    .contact-content {
+        gap: 40px;
+    }
+    
+    .qr-placeholder {
+        max-width: 250px;
+        padding: 25px;
+    }
+    
+    .qr-simulated {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+/* Анимация загрузки */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.loaded .hero-content,
+.loaded .section > .container {
+    animation: fadeInUp 0.8s ease-out forwards;
+}
+/* Статистика */
+.stats {
+    background: linear-gradient(135deg, #1a0a0a 0%, #2a1515 100%);
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+}
+
+.stats::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: var(--gradient-gold-red);
+}
+
+.stats .section-title {
+    color: var(--white);
+}
+
+.stats .section-title::after {
+    background: var(--secondary-color);
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 35px;
+    margin-top: 40px;
+}
+
+.stat-card {
+    background: rgba(255, 255, 255, 0.08);
+    padding: 40px 25px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid rgba(218, 165, 32, 0.2);
+    transition: var(--transition);
+    backdrop-filter: blur(5px);
+}
+
+.stat-card:hover {
+    background: rgba(255, 255, 255, 0.12);
+    transform: translateY(-10px);
+    border-color: var(--secondary-color);
+    box-shadow: 0 15px 30px rgba(218, 165, 32, 0.2);
+}
+
+.stat-icon {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    margin-bottom: 20px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-number {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+    color: var(--secondary-color);
+    text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    font-family: 'Playfair Display', serif;
+}
+
+.stat-label {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+}
+
+@media (max-width: 768px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+    }
+    
+    .stat-number {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
     }
 }
