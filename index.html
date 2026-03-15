@@ -23,8 +23,6 @@
 <noscript><div><img src="https://mc.yandex.ru/watch/106544381" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
 
-
-
 </head>
 <body>
     <!-- Навигация -->
@@ -38,7 +36,8 @@
                 <li><a href="#home">Главная</a></li>
                 <li><a href="#about">Об артисте</a></li>
                 <li><a href="#achievements">Достижения</a></li>
-                <li><a href="#concerts">Концерты</a></li>
+                <!-- ИЗМЕНЕНО: ссылка ведёт на раздел "Музыка, которая помогает" (бывшая #concerts) -->
+                <li><a href="#charity">Концерты</a></li>
                 <li><a href="#contact">Контакты</a></li>
             </ul>
         </div>
@@ -53,7 +52,8 @@
                 <p class="hero-text">Певица, чей талант отмечен на всероссийском уровне, а сердце принадлежит тем, кто стоит на защите Родины.</p>
                 <div class="hero-buttons">
                     <a href="#about" class="btn btn-primary">Узнать больше</a>
-                    <a href="#concerts" class="btn btn-secondary">Ближайший концерт</a>
+                    <!-- ИЗМЕНЕНО: кнопка теперь ведёт на раздел с прошедшими концертами и текст изменён -->
+                    <a href="#charity" class="btn btn-secondary">Концерты</a>
                 </div>
             </div>
         </div>
@@ -135,65 +135,53 @@
         </div>
     </section>
 
-    <!-- Благотворительность -->
-<section id="charity" class="section charity">
-    <div class="container">
-        <h2 class="section-title">Музыка, которая помогает</h2>
-        
-        <div class="charity-simple">
-            <!-- Текст слева -->
-            <div class="charity-text-simple">
-                <p>Особое место в творчестве Марины занимают благотворительные проекты. Все средства от её сольных концертов направляются на поддержку участников СВО.</p>
-                
-                <div class="charity-events">
-                    <div class="event">
-                        <h3>11 сентября 2025</h3>
-                        <p>Сольный концерт в Печерском РЦК (Псковская область)</p>
-                    </div>
-                    <div class="event">
-                        <h3>6 декабря 2025</h3>
-                        <p>Сольный концерт в Культурно-молодёжном центре г. Светлый</p>
-                    </div>
-                    <div class="event">
-                        <h3>6 января 2026</h3>
-                        <p>Сольный концерт в Доме офицеров Балтийского флота(г. Балтийск)</p>
-                    </div>
-                </div>
-                
-                <p class="charity-note">Все благотворительные средства были собраны для участников СВО.</p>
-            </div>
-            
-            <!-- Простое фото справа -->
-            <div class="charity-photo-simple">
-                <img src="images/charity-simple.jpg" alt="Марина Гильенберг на благотворительном концерте">
-                <p class="photo-description">Благотворительный концерт для военнослужащих</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-    <!-- Ближайший концерт -->
-    <section id="concerts" class="section concert">
+    <!-- Благотворительность (Музыка, которая помогает) -->
+    <section id="charity" class="section charity">
         <div class="container">
-            <h2 class="section-title">Ближайший концерт</h2>
-            <div class="concert-card">
-                <div class="concert-date">
-                    <div class="date-day">06</div>
-                    <div class="date-month">Марта</div>
-                    <div class="date-year">2026</div>
-                </div>
-                <div class="concert-details">
-                    <h3>Благотворительный вечер.   Концертная программа "Zаряд"</h3>
-                    <p class="concert-time"><i class="far fa-clock"></i> 19:00</p>
-                    <p class="concert-location"><i class="fas fa-map-marker-alt"></i> Дом офицеров Балтийского флота, г. Калининград, ул. Кирова, 7</p>
-                    <p class="concert-description">Прикоснитесь к высокому искусству и станьте частью доброго дела. Весь сбор от концерта будет направлен на благотворительные цели.</p>
-                    <div class="concert-actions">
-                                              <p class="concert-phone">Справки: <strong>+7 921 614-80-60</strong></p>
+            <h2 class="section-title">Музыка, которая помогает</h2>
+            
+            <div class="charity-simple">
+                <!-- Текст слева -->
+                <div class="charity-text-simple">
+                    <p>Особое место в творчестве Марины занимают благотворительные проекты. Все средства от её сольных концертов направляются на поддержку участников СВО.</p>
+                    
+                    <div class="charity-events">
+                        <div class="event">
+                            <h3>11 сентября 2025</h3>
+                            <p>Сольный концерт в Печерском РЦК (Псковская область)</p>
+                        </div>
+                        <div class="event">
+                            <h3>6 декабря 2025</h3>
+                            <p>Сольный концерт в Культурно-молодёжном центре г. Светлый</p>
+                        </div>
+                        <div class="event">
+                            <h3>6 января 2026</h3>
+                            <p>Сольный концерт в Доме офицеров Балтийского флота(г. Балтийск)</p>
+                        </div>
+                        <!-- ИЗМЕНЕНО: добавлены два новых прошедших концерта -->
+                        <div class="event">
+                            <h3>23 февраля 2026</h3>
+                            <p>Концерт в 136 специальный моторизованный полк войск национальной гвардии Российской Федерации</p>
+                        </div>
+                        <div class="event">
+                            <h3>6 марта 2026</h3>
+                            <p>Благотворительный вечер в Доме офицеров г. Калиннинграда. Концертная программа "Zаряд"</p>
+                        </div>
                     </div>
+                    
+                    <p class="charity-note">Все благотворительные средства были собраны для участников СВО.</p>
+                </div>
+                
+                <!-- Простое фото справа -->
+                <div class="charity-photo-simple">
+                    <img src="images/charity-simple.jpg" alt="Марина Гильенберг на благотворительном концерте">
+                    <p class="photo-description">Благотворительный концерт для военнослужащих</p>
                 </div>
             </div>
         </div>
     </section>
+
+    <!-- УДАЛЕНО: секция "Ближайший концерт" (id="concerts") полностью убрана -->
 
     <!-- Контакты -->
     <section id="contact" class="section contact">
@@ -209,7 +197,7 @@
                         <p class="contact-note">Открыта к сотрудничеству и участию в патриотических, культурных и благотворительных мероприятиях.</p>
                     </div>
                 </div>
-                    </section>
+                    </section>   <!-- Это закрытие секции contact, но структура немного нарушена, оставляем как было -->
 <!-- Статистика -->
 <section id="stats" class="section stats">
     <div class="container">
