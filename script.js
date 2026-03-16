@@ -102,4 +102,67 @@ const observer = new IntersectionObserver((entries) => {
 const statsSection = document.querySelector('#stats');
 if (statsSection) {
     observer.observe(statsSection);
-}
+} // Универсальный слайдер для всех событий
+document.addEventListener('DOMContentLoaded', function() {
+    const sliders = document.querySelectorAll('.event-slider');
+    
+    sliders.forEach((slider, index) => {
+        const track = slider.querySelector('.slider-track');
+        const slides = slider.querySelectorAll('.slider-slide');
+        const prevBtn = slider.querySelector('.slider-prev');
+        const nextBtn = slider.querySelector('.slider-next');
+        const dotsContainer = slider.querySelector('.slider-dots');
+        
+        if (!track || slides.length === 0) return;
+        
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        
+        // Создаем точки
+        dotsContainer.innerHTML = ''; // очищаем (на случай если есть старые)
+        slides.forEach((_, i) => {
+            const dot = document.createElement('span');
+            dot.classList.add('slider-dot');
+            dot.dataset.index = i;
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i));
+            dotsContainer.appendChild(dot);
+        });
+        
+        const dots = slider.querySelectorAll('.slider-dot');
+        
+        function goToSlide(index) {
+            if (index < 0) index = totalSlides - 1;
+            if (index >= totalSlides) index = 0;
+            
+            track.style.transform = `translateX(-${index * 100}%)`;
+            currentIndex = index;
+            
+            dots.forEach(dot => dot.classList.remove('active'));
+            dots[currentIndex].classList.add('active');
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+        }
+        
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+        }
+        
+        // Свайп для мобильных
+        let touchStartX = 0;
+        track.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, {passive: true});
+        
+        track.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX < touchStartX - 50) {
+                goToSlide(currentIndex + 1);
+            } else if (touchEndX > touchStartX + 50) {
+                goToSlide(currentIndex - 1);
+            }
+        }, {passive: true});
+    });
+});
